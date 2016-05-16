@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MarkBiesheuvel/sf-food-trucks/issues"
   },
-  "homepage": "https://github.com/MarkBiesheuvel/sf-food-trucks#readme"
+  "homepage": "https://github.com/MarkBiesheuvel/sf-food-trucks#readme",
+  "dependencies": {
+    "aws-sdk": "^2.3.11"
+  }
 }
