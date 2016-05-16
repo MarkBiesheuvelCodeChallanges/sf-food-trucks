@@ -1,0 +1,19 @@
+{
+  "name": "sf-food-trucks",
+  "version": "0.1.0",
+  "description": "A service that tells the user what types of food trucks might be found near a specific location on a map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkBiesheuvel/sf-food-trucks.git"
+  },
+  "author": "Mark Biesheuvel <mark@qforma.nl>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarkBiesheuvel/sf-food-trucks/issues"
+  },
+  "homepage": "https://github.com/MarkBiesheuvel/sf-food-trucks#readme"
+}
