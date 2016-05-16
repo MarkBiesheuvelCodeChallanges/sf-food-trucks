@@ -8,12 +8,12 @@ In order to be able to execute these commands you need to have a valid AWS acces
 The user associated with these credentials also needs permissions to perform these actions.
 
 To create DynamoDB table. (One time only)
-```javascript
+```bash
 node create-table.js
 ```
 
 To import the complete dataset
-```javascript
+```bash
 node import.js
 ```
 
