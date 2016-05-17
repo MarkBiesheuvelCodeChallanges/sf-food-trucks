@@ -9,12 +9,12 @@ The user associated with these credentials also needs permissions to perform the
 
 To create DynamoDB table. (One time only)
 ```bash
-node create-table.js
+node import/create-table.js
 ```
 
 To import the complete dataset
 ```bash
-node import.js
+node import/import.js
 ```
 
 ## Data source

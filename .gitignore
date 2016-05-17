@@ -33,4 +33,4 @@ node_modules
 .node_repl_history
 
 # Data folder
-/data
+/import/data
