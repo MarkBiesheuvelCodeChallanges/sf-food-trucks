@@ -4,9 +4,9 @@ AWS.config.update({
     region: "eu-central-1"
 });
 
-let documentClient = new AWS.DynamoDB.DocumentClient();
+var documentClient = new AWS.DynamoDB.DocumentClient();
 
-let insertItem = (row) => {
+var insertItem = function (row) {
 
     if (!('latitude' in row) || !('longitude' in row)) {
         return
@@ -18,13 +18,13 @@ let insertItem = (row) => {
 
     row.latlng = Math.floor(row.latitude * 100) + ',' + Math.floor(row.longitude * 100);
 
-    let params = {
+    var params = {
         TableName: "FoodTrucks",
         Item: row
     };
 
     // TODO: implement batchWriteItem http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#batchWrite-property
-    documentClient.put(params, (err) => {
+    documentClient.put(params, function (err) {
         if (err) {
             throw err;
         }
@@ -33,7 +33,7 @@ let insertItem = (row) => {
 
 // This is a local copy of https://data.sfgov.org/resource/6a9r-agq8.json
 // TODO: Download new file on import
-const data = require('./data/food_trucks.json');
+var data = require('./data/food_trucks.json');
 
 data.forEach(insertItem);
 

@@ -4,9 +4,9 @@ AWS.config.update({
     region: "eu-central-1"
 });
 
-let dynamodb = new AWS.DynamoDB();
+var dynamodb = new AWS.DynamoDB();
 
-let params = {
+var params = {
     TableName: "FoodTrucks",
     KeySchema: [
         {
@@ -34,7 +34,7 @@ let params = {
     }
 };
 
-dynamodb.createTable(params, (err) => {
+dynamodb.createTable(params, function (err) {
     if (err) {
         throw err;
     }
