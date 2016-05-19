@@ -8,6 +8,16 @@ let documentClient = new AWS.DynamoDB.DocumentClient();
 
 let insertItem = (row) => {
 
+    if (!('latitude' in row) || !('longitude' in row)) {
+        return
+    }
+
+    row.objectid = parseInt(row.objectid, 10);
+    row.latitude = parseFloat(row.latitude);
+    row.longitude = parseFloat(row.longitude);
+
+    row.latlng = Math.floor(row.latitude * 100) + ',' + Math.floor(row.longitude * 100);
+
     let params = {
         TableName: "FoodTrucks",
         Item: row

@@ -10,19 +10,27 @@ let params = {
     TableName: "FoodTrucks",
     KeySchema: [
         {
-            AttributeName: "objectid",
+            AttributeName: "latlng",
             KeyType: "HASH"
+        },
+        {
+            AttributeName: "objectid",
+            KeyType: "RANGE"
         }
     ],
     AttributeDefinitions: [
         {
-            AttributeName: "objectid",
+            AttributeName: "latlng",
             AttributeType: "S"
+        },
+        {
+            AttributeName: "objectid",
+            AttributeType: "N"
         }
     ],
     ProvisionedThroughput: {
-        ReadCapacityUnits: 1,
-        WriteCapacityUnits: 4
+        ReadCapacityUnits: 25,
+        WriteCapacityUnits: 25
     }
 };
 
