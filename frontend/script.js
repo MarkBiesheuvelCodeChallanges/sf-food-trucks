@@ -27,7 +27,7 @@ $(function () {
             lat: 37.7749,
             lng: -122.4194
         },
-        zoom: 15
+        zoom: 16
     });
 
     $.ajax({
@@ -54,28 +54,40 @@ $(function () {
         }
     });
 
+    var createRectangle = function (bool, lat, lng) {
+
+        var color = bool ? '#000' : '#FFF';
+
+        var bounds = {
+            north: lat + 0.01,
+            south: lat,
+            east: lng + 0.01,
+            west: lng
+        };
+
+        var rectangle = new google.maps.Rectangle({
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            fillColor: color,
+            fillOpacity: 0.35,
+            map: map,
+            bounds: bounds
+        });
+
+        rectangle.addListener('click', function () {
+
+            // TODO: request all markers within bounds
+            console.log(Math.round(lat * 100)+ ',' + Math.round(lng * 100));
+
+        });
+    };
 
     var bool = true;
-    var color;
 
     for (var lat = 37.70; lat <= 37.8; lat += 0.01) {
         for (var lng = -122.50; lng <= -122.37; lng += 0.01) {
 
-            color = bool ? '#000' : '#FFF';
-
-            new google.maps.Rectangle({
-                strokeColor: color,
-                strokeOpacity: 0.8,
-                fillColor: color,
-                fillOpacity: 0.35,
-                map: map,
-                bounds: {
-                    north: lat + 0.01,
-                    south: lat,
-                    east: lng + 0.01,
-                    west: lng
-                }
-            });
+            createRectangle(bool, lat, lng);
 
             bool = !bool;
         }
