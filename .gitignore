@@ -34,3 +34,5 @@ node_modules
 
 # Data folder
 /import/data
+
+/.idea

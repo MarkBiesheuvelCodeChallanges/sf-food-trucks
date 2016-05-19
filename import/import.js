@@ -21,7 +21,7 @@ let insertItem = (row) => {
     });
 };
 
-// This is a local copy of https://data.sfgov.org/api/views/rqzj-sfat/rows.json?accessType=DOWNLOAD
+// This is a local copy of https://data.sfgov.org/resource/6a9r-agq8.json
 // TODO: Download new file on import
 const data = require('./data/food_trucks.json');
 

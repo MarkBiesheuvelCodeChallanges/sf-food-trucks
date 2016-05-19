@@ -16,7 +16,7 @@ $(function () {
     handleResize();
 
     map = new google.maps.Map($el[0], {
-        scrollwheel: false,
+        // scrollwheel: false,
         navigationControl: false,
         mapTypeControl: false,
         scaleControl: false,
@@ -54,55 +54,31 @@ $(function () {
         }
     });
 
-    // Attempt to use extending bounds to determine which food trucks to load
 
-    var convertBoundsToMinMax = function (bounds) {
+    var bool = true;
+    var color;
 
-        var sw = bounds.getSouthWest();
-        var ne = bounds.getNorthEast();
+    for (var lat = 37.70; lat <= 37.8; lat += 0.01) {
+        for (var lng = -122.50; lng <= -122.37; lng += 0.01) {
 
-        return {
-            lat: {
-                min: sw.lat(),
-                max: ne.lat()
-            },
-            lng: {
-                min: sw.lng(),
-                max: ne.lng()
-            }
-        };
+            color = bool ? '#000' : '#FFF';
 
-    };
+            new google.maps.Rectangle({
+                strokeColor: color,
+                strokeOpacity: 0.8,
+                fillColor: color,
+                fillOpacity: 0.35,
+                map: map,
+                bounds: {
+                    north: lat + 0.01,
+                    south: lat,
+                    east: lng + 0.01,
+                    west: lng
+                }
+            });
 
-    google.maps.event.addListenerOnce(map, 'idle', function () {
-
-        var previousBounds = null;
-
-        var handleDrag = function(){
-            var currentBounds = map.getBounds();
-
-            var params = {
-                include: convertBoundsToMinMax(currentBounds)
-            };
-
-            if (previousBounds) {
-
-                params.exclude = convertBoundsToMinMax(previousBounds);
-
-                // Expand accumulative bounds
-                previousBounds = previousBounds.union(currentBounds);
-            } else {
-                previousBounds = currentBounds;
-            }
-
-            console.log(params);
-        };
-
-        // TODO: combine drag event with a throttled function
-        google.maps.event.addListener(map, 'dragend', handleDrag);
-        handleDrag();
-
-    });
-
+            bool = !bool;
+        }
+    }
 
 });
