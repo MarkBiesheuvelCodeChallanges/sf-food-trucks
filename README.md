@@ -2,6 +2,15 @@
 
 A service that tells the user what types of food trucks might be found near a specific location on a map.
 
+## Goal
+
+My goal for this code challenge is to try out and show two concepts: a serverless architecture and dynamic loading of geographical locations.
+
+To accomplish this I have chosen to use the following set of microservices:
+* [Amazon DynamoDB](https://aws.amazon.com/dynamodb): Store locations based on their coordinates to perform quick queries
+* [AWS Lambda](https://aws.amazon.com/lambda/) & [Amazon API Gateway](https://aws.amazon.com/api-gateway/): Provide API to retrieve data
+* [Amazon S3](https://aws.amazon.com/s3/) Host static front-end (hml/javascript)
+
 ## Import data into Amazon DynamoDb
 
 In order to be able to execute these commands you need to have a valid AWS access key and secret configured on your machine.
