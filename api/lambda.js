@@ -15,7 +15,7 @@ exports.handler = function (event, context) {
 
     var params = {
         TableName: 'FoodTrucks',
-        AttributesToGet: ['applicant', 'fooditems', 'dayshours'],
+        AttributesToGet: ['applicant', 'fooditems', 'dayshours', 'latitude', 'longitude'],
         ConsistentRead: false,
         KeyConditions: {
             latlng: {

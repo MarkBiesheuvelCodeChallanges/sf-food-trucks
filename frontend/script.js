@@ -30,33 +30,7 @@ $(function () {
         zoom: 16
     });
 
-    $.ajax({
-        url: 'http://localhost/sf-food-trucks/import/data/food_trucks.json',
-        dataType: 'json',
-        success: function (data) {
-
-            data.forEach(function (row) {
-
-                if (!('location' in row) || row.location.type !== 'Point') {
-                    return;
-                }
-
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: row.location.coordinates[1],
-                        lng: row.location.coordinates[0]
-                    },
-                    map: map,
-                    title: row.applicant
-                })
-
-            });
-        }
-    });
-
-    var createRectangle = function (bool, lat, lng) {
-
-        var color = bool ? '#000' : '#FFF';
+    var createRectangle = function (lat, lng) {
 
         var bounds = {
             north: lat + 0.01,
@@ -66,9 +40,8 @@ $(function () {
         };
 
         var rectangle = new google.maps.Rectangle({
-            strokeColor: color,
-            strokeOpacity: 0.8,
-            fillColor: color,
+            strokeWeight: 0,
+            fillColor: '#000',
             fillOpacity: 0.35,
             map: map,
             bounds: bounds
@@ -77,19 +50,42 @@ $(function () {
         rectangle.addListener('click', function () {
 
             // TODO: request all markers within bounds
-            console.log(Math.round(lat * 100)+ ',' + Math.round(lng * 100));
+            var latlng = Math.round(lat * 100) + ',' + Math.round(lng * 100);
 
+            $.ajax({
+                url: 'https://09ajp1m1wc.execute-api.eu-central-1.amazonaws.com/prod/FoodTruck',
+                method: 'POST',
+                data: JSON.stringify({latlng: latlng}),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                crossDomain: true,
+                error: function (a, b, c) {
+                    console.log(a, b, c);
+                },
+                success: function (responose) {
+
+                    responose.forEach(function (row) {
+
+                        new google.maps.Marker({
+                            position: {
+                                lat: row.latitude,
+                                lng: row.longitude
+                            },
+                            map: map,
+                            title: row.applicant
+                        });
+                    });
+
+                    rectangle.setMap(null);
+                    delete rectangle;
+                }
+            });
         });
     };
 
-    var bool = true;
-
     for (var lat = 37.70; lat <= 37.8; lat += 0.01) {
         for (var lng = -122.50; lng <= -122.37; lng += 0.01) {
-
-            createRectangle(bool, lat, lng);
-
-            bool = !bool;
+            createRectangle(lat, lng);
         }
     }
 
