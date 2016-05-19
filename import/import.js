@@ -32,8 +32,7 @@ var insertItem = function (row) {
 };
 
 // This is a local copy of https://data.sfgov.org/resource/6a9r-agq8.json
-// TODO: Download new file on import
-var data = require('./data/food_trucks.json');
+var data = require('./food_trucks.json');
 
 data.forEach(insertItem);
 

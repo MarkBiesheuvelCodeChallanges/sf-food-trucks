@@ -32,7 +32,7 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-# Data folder
-/import/data
+# Data files
+/import/*.json
 
 /.idea
