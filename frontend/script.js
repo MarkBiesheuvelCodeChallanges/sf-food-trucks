@@ -4,22 +4,7 @@ $(function () {
 
     var cache = {};
 
-    var $window = $(window);
-    var $el = $('#map');
-
-    /**
-     * Handle resizing of window
-     */
-    var handleResize = function () {
-        $el.css({
-            width: $window.width(),
-            height: $window.height(),
-        });
-    };
-    $window.on('resize', handleResize);
-    handleResize();
-
-    map = new google.maps.Map($el[0], {
+    map = new google.maps.Map(document.getElementById('map'), {
         navigationControl: false,
         mapTypeControl: false,
         streetViewControl: false,
