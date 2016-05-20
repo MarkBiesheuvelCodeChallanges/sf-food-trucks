@@ -4,7 +4,15 @@ var lambda = require('./lambda.js');
 
 // Sample event
 var event = {
-    latlng: '3780,-12243'
+    "bounds": {
+        "north": 37.77914004014629,
+        "east": -122.40716912689209,
+        "south": 37.77065971667162,
+        "west": -122.4316308731079
+    },
+    "name": "",
+    "food": "mexican",
+    "open_on": "mon"
 };
 
 // Lambda-like context object
