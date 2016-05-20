@@ -71,7 +71,13 @@ $(function () {
             data: JSON.stringify(request),
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            success: updateMap
+            success: function (response) {
+                if ('errorMessage' in response) {
+                    console.error(response.errorMessage);
+                } else {
+                    updateMap(response);
+                }
+            }
         });
     };
 
