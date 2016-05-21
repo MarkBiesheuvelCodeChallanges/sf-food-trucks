@@ -61,9 +61,8 @@ $(function () {
             }
         };
 
-        request.name = '';
-        request.food = 'mexican';
-        request.open_on = 'mon';
+        // request.name = '';
+        request.open_on = 'su';
 
         $.ajax({
             url: 'https://09ajp1m1wc.execute-api.eu-central-1.amazonaws.com/prod/FoodTruck',

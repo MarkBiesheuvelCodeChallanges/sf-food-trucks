@@ -6,7 +6,7 @@ AWS.config.update({
 
 var documentClient = new AWS.DynamoDB.DocumentClient();
 
-var getByLatLng = function (latlng) {
+var getByLatLng = function (latlng, filters) {
 
     var params = {
         TableName: 'FoodTrucks',
@@ -30,6 +30,28 @@ var getByLatLng = function (latlng) {
         }
     };
 
+    // if ('foodtype' in filters) {
+    //     params.QueryFilter.foodtype = {
+    //         ComparisonOperator: 'CONTAINS',
+    //         AttributeValueList: [filters.foodtype]
+    //     };
+    // }
+
+    if ('name' in filters) {
+
+        params.QueryFilter.applicant = {
+            ComparisonOperator: 'CONTAINS',
+            AttributeValueList: [filters.name]
+        };
+    }
+    
+    if ('open_on' in filters) {
+        params.QueryFilter.days = {
+            ComparisonOperator: 'CONTAINS',
+            AttributeValueList: [filters.open_on]
+        };
+    }
+    
     return new Promise(function (resolve, reject) {
 
         documentClient.query(params)
@@ -43,9 +65,10 @@ var getByLatLng = function (latlng) {
     });
 };
 
-exports.handler = function (event, context) {
+exports.handler = function (request, context) {
 
-    var bounds = event.bounds;
+    var bounds = request.bounds;
+    delete request.bounds;
 
     var north = Math.floor(bounds.north * 100);
     var east = Math.floor(bounds.east * 100);
@@ -57,7 +80,7 @@ exports.handler = function (event, context) {
     // From west to east and from south to north
     for (var lng = west; lng <= east; lng++) {
         for (var lat = south; lat <= north; lat++) {
-            promises.push(getByLatLng(lat + ',' + lng));
+            promises.push(getByLatLng(lat + ',' + lng, request));
         }
     }
 

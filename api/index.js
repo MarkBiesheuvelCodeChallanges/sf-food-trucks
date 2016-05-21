@@ -10,9 +10,8 @@ var event = {
         "south": 37.77065971667162,
         "west": -122.4316308731079
     },
-    "name": "",
-    "food": "mexican",
-    "open_on": "mon"
+    "name": "Natan's",
+    "open_on": "tu"
 };
 
 // Lambda-like context object
