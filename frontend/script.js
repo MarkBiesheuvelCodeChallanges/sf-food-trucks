@@ -1,7 +1,8 @@
 $(function () {
 
     var map;
-    var markers = [];
+    var markers = {};
+    var filters = {};
 
     map = new google.maps.Map(document.getElementById('map'), {
         navigationControl: false,
@@ -21,25 +22,40 @@ $(function () {
      * @param {Array} items
      */
     var updateMap = function (items) {
-        // TODO: don't delete and recreate markers that are already on the map
 
-        // Get rid of old markers
-        markers.forEach(function (marker) {
-            marker.setMap(null);
-            delete marker;
+        var previousMarkers = markers;
+        markers = {};
+
+        items.forEach(function (row) {
+
+            if (row.objectid in previousMarkers) {
+
+                // No need to recreate it
+                markers[row.objectid] = previousMarkers[row.objectid];
+
+                // Take it off the list of previous markers so it won't be deleted
+                delete previousMarkers[row.objectid];
+
+            } else {
+
+                // Create new marker
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: row.latitude,
+                        lng: row.longitude
+                    },
+                    map: map,
+                    title: row.applicant
+                });
+
+                markers[row.objectid] = marker;
+            }
         });
 
-        // Create new markers
-        markers = items.map(function (row) {
-            return new google.maps.Marker({
-                position: {
-                    lat: row.latitude,
-                    lng: row.longitude
-                },
-                map: map,
-                title: row.applicant
-            });
-        });
+        // Get rid of previous markers that weren't kept
+        for (var objectid in previousMarkers) {
+            previousMarkers[objectid].setMap(null);
+        }
     };
 
     /**
@@ -52,17 +68,14 @@ $(function () {
      */
     var getFoodTrucks = function (north, east, south, west) {
 
-        var request = {
-            bounds: {
-                north: north,
-                east: east,
-                south: south,
-                west: west
-            }
-        };
+        var request = filters;
 
-        // request.name = '';
-        request.open_on = 'su';
+        request.bounds = {
+            north: north,
+            east: east,
+            south: south,
+            west: west
+        };
 
         $.ajax({
             url: 'https://09ajp1m1wc.execute-api.eu-central-1.amazonaws.com/prod/FoodTruck',
@@ -80,14 +93,72 @@ $(function () {
         });
     };
 
-    google.maps.event.addListener(map, 'idle', function () {
-
+    /**
+     * Reload all the markers
+     */
+    var reload = function () {
         var bounds = map.getBounds();
 
         var sw = bounds.getSouthWest();
         var ne = bounds.getNorthEast();
 
         getFoodTrucks(ne.lat(), ne.lng(), sw.lat(), sw.lng());
+    };
+
+
+    $('[role="btn-group"]').each(function () {
+
+        var $group = $(this);
+        var name = $group.attr('name');
+        var $buttons = $group.find('button');
+
+        $buttons.each(function () {
+
+            var $button = $(this);
+            var value = $button.val();
+            $button.on('click', function () {
+
+                $buttons.removeClass('active');
+                $button.addClass('active');
+
+                filters[name] = value;
+
+                reload();
+            });
+        });
     });
 
+    $('[role="search"]').each(function () {
+
+        var $search = $(this);
+        var $input = $search.find('input');
+        var $button = $search.find('button');
+        var name = $input.attr('name');
+
+        var update = function () {
+
+            var value = $input.val();
+
+            if (value === '') {
+                delete filters[name];
+            } else {
+                filters[name] = value;
+            }
+
+            reload();
+        };
+
+        $input.on('keypress', function (e) {
+            if (e.keyCode === 13) {
+                update();
+            }
+        });
+
+        $button.on('click', function () {
+            update();
+        });
+
+    })
+
+    google.maps.event.addListener(map, 'idle', reload);
 });

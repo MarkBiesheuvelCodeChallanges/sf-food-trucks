@@ -10,7 +10,7 @@ var getByLatLng = function (latlng, filters) {
 
     var params = {
         TableName: 'FoodTrucks',
-        AttributesToGet: ['applicant', 'fooditems', 'dayshours', 'latitude', 'longitude'],
+        AttributesToGet: ['objectid', 'applicant', 'fooditems', 'dayshours', 'latitude', 'longitude'],
         ConsistentRead: false,
         KeyConditions: {
             latlng: {

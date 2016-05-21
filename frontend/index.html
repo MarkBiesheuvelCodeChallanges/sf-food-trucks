@@ -22,13 +22,13 @@
         <div class="col-sm-6 col-lg-4">
             <h2>Name</h2>
 
-            <div class="input-group">
-                <input type="text" class="form-control">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+            <div class="input-group" role="search">
+                <input type="text" class="form-control" name="name">
+                <span class="input-group-btn">
+                    <button class="btn btn-default">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
-                  </span>
+                </span>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
         <div class="col-sm-6 col-lg-4">
             <h2>Food</h2>
 
-            <div class="btn-group" role="group">
+            <div class="btn-group" role="btn-group" data-name="foodtype">
                 <button class="btn btn-default" value="snacks">Snacks</button>
                 <button class="btn btn-default" value="mexican">Mexican</button>
                 <button class="btn btn-default" value="sandwiches">Sandwiches</button>
@@ -48,14 +48,14 @@
         <div class="col-sm-6 col-lg-4">
             <h2>Open on</h2>
 
-            <div class="btn-group" role="group">
-                <button class="btn btn-default">Mon</button>
-                <button class="btn btn-default">Tue</button>
-                <button class="btn btn-default">Wed</button>
-                <button class="btn btn-default">Thu</button>
-                <button class="btn btn-default">Fri</button>
-                <button class="btn btn-default">Sat</button>
-                <button class="btn btn-default">Sun</button>
+            <div class="btn-group" role="btn-group" name="open_on">
+                <button class="btn btn-default" value="mo">Mon</button>
+                <button class="btn btn-default" value="tu">Tue</button>
+                <button class="btn btn-default" value="we">Wed</button>
+                <button class="btn btn-default" value="th">Thu</button>
+                <button class="btn btn-default" value="fr">Fri</button>
+                <button class="btn btn-default" value="sa">Sat</button>
+                <button class="btn btn-default" value="su">Sun</button>
             </div>
         </div>
     </div>
