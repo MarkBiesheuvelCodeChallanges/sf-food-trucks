@@ -3,6 +3,7 @@ $(function () {
     var map;
     var markers = {};
     var filters = {};
+    var infowindow = new google.maps.InfoWindow();
 
     map = new google.maps.Map(document.getElementById('map'), {
         navigationControl: false,
@@ -46,6 +47,17 @@ $(function () {
                     },
                     map: map,
                     title: row.applicant
+                });
+
+                marker.addListener('click', function () {
+
+                    infowindow.setContent(
+                        '<strong>' + row.applicant + '</strong><br>' +
+                        row.fooditems + '<br>' +
+                        row.dayshours
+                    );
+                    infowindow.open(map, marker);
+
                 });
 
                 markers[row.objectid] = marker;
@@ -116,12 +128,23 @@ $(function () {
 
             var $button = $(this);
             var value = $button.val();
+            var isActive = false;
+
             $button.on('click', function () {
 
-                $buttons.removeClass('active');
-                $button.addClass('active');
+                // Flip active boolean
+                isActive = !isActive;
 
-                filters[name] = value;
+                // Remove active class from all buttons
+                $buttons.removeClass('active');
+
+                if (isActive) {
+                    // Reapply active class
+                    $button.addClass('active');
+                    filters[name] = value;
+                } else {
+                    delete filters[name];
+                }
 
                 reload();
             });
