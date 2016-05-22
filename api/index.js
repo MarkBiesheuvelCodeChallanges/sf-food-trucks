@@ -1,4 +1,4 @@
-// Simulate lambda event trigger
+// Simulate lambda event trigger, this is a script I use to debug during development
 
 var lambda = require('./lambda.js');
 
@@ -23,7 +23,7 @@ var context = {
         console.log({
             errorMessage: err
         });
-    },
+    }
 };
 
 // Invoke lambda function

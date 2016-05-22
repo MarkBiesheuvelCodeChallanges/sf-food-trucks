@@ -5,22 +5,22 @@ A service that tells the user what types of food trucks might be found near a sp
 ## Importer
 
 This project uses a data set that is made available by the [City and County of San Francisco](https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat).
-This data is imported into a DynamoDB database with the following commands
+This data is imported into a DynamoDB database with the following commands.
 
 In order to be able to execute these commands you need to have a valid AWS access key and secret configured on your machine.
 The user associated with these credentials also needs permissions to perform these actions.
 
-To download the data file
+To download the data file:
 ```bash
 wget https://data.sfgov.org/resource/6a9r-agq8.json -O import/food_trucks.json
 ```
 
-To create DynamoDB table. (One time only)
+To create DynamoDB table: (One time only)
 ```bash
 node import/create-table.js
 ```
 
-To import the complete dataset
+To import the complete data set:
 ```bash
 node import/import.js
 ```
@@ -71,6 +71,11 @@ $.ajax({
 });
 ```
 
+## Tests
+
+To run the tests use the command `npm test`.
+Right now the tests are based on a specific version of the data set so they might fail on newer versions.
+
 ## Code challenge
 
 The following paragraphs are about the code challenge for which I created this project.
@@ -90,9 +95,9 @@ My familiarity with the technical stack is:
 My goal for this code challenge is to try out and develop a serverless architecture.
 
 To accomplish this I have chosen to use the following set of microservices:
-* [Amazon DynamoDB](https://aws.amazon.com/dynamodb): Store locations based on their coordinates to perform quick queries
-* [AWS Lambda](https://aws.amazon.com/lambda/) & [Amazon API Gateway](https://aws.amazon.com/api-gateway/): Provide API to retrieve data
-* [Amazon S3](https://aws.amazon.com/s3/) Host static front-end (HTML/JavaScript)
+- **[Amazon DynamoDB](https://aws.amazon.com/dynamodb)**: Store locations based on their coordinates to perform quick queries
+- **[AWS Lambda](https://aws.amazon.com/lambda/)** & **[Amazon API Gateway](https://aws.amazon.com/api-gateway/)**: Provide API to retrieve data
+- **[Amazon S3](https://aws.amazon.com/s3/)**: Host static front-end (HTML/JavaScript)
 
 In hindsight however I am not sure using DynamoDB was the right choice.
 Looking back I should have spend more time researching what is possible with this NoSQL database compared to others.
@@ -136,6 +141,7 @@ var dayRegexes = {
 - Use `batchWrite` when importing data (if still using DynamoDB)
 - Minimize assets (HTML/JavaScript/CSS)
 - Custom builds of jQuery/Bootstrap
+- Make tests independent of data set
 
 ### Resume/online profiles
 
@@ -145,8 +151,8 @@ var dayRegexes = {
 
 ### Other code
 
-- My own website ([code](https://github.com/MarkBiesheuvel/markbiesheuvel.nl)/[live](https://markbiesheuvel.nl/)): Automated builds with tons of web performance optimazations
-- Six of spades ([code](https://github.com/MarkBiesheuvel/six-of-spades)): A fully customizable poker library (work in progress)
+- **My own website** ([code](https://github.com/MarkBiesheuvel/markbiesheuvel.nl)/[live](https://markbiesheuvel.nl/)): Automated builds with tons of web performance optimazations
+- **Six of spades** ([code](https://github.com/MarkBiesheuvel/six-of-spades)): A fully customizable poker library (work in progress)
 
 ### Credits
 

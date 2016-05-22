@@ -4,7 +4,7 @@
   "description": "A service that tells the user what types of food trucks might be found near a specific location on a map",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/nodeunit/bin/nodeunit api/test.js "
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "homepage": "https://github.com/MarkBiesheuvel/sf-food-trucks#readme",
   "dependencies": {
     "aws-sdk": "^2.3.11"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
   }
 }
