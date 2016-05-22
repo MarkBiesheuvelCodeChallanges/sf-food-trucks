@@ -4,7 +4,7 @@ A service that tells the user what types of food trucks might be found near a sp
 
 ## Importer
 
-This project uses a data set that is made available by the [City and County of San Francisco](https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat).
+This project uses a data set that's made available by the [City and County of San Francisco](https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat).
 This data is imported into a DynamoDB database with the following commands.
 
 In order to be able to execute these commands you need to have a valid AWS access key and secret configured on your machine.
@@ -38,7 +38,7 @@ The API will return all food trucks within an area equal to or larger than given
 
 With the `name` property you can filter on the name of the food truck
 
-With the `open_on` property you can filter on which day the food truck is open. Valid options are `mo`, `tu`, `we`, `th`, `fr`, `sa`, or `su`
+With the `open_on` property you can filter on which day the food truck will be open. Valid options are `mo`, `tu`, `we`, `th`, `fr`, `sa`, or `su`
 
 With the `foodtype` property you can filter on the type of food the truck sells. Valid options are `snacks`, `mexican`, `sandwiches`, or `drinks`
 
@@ -75,12 +75,17 @@ $.ajax({
 
 ## Tests
 
-To run the tests use the command `npm test`.
+To run the tests:
+```bash
+npm test
+```
+
 Right now the tests are based on a specific version of the data set so they might fail on newer versions.
 
 ## Code challenge
 
-The following paragraphs are about the code challenge for which I created this project.
+I created this project for a code challenge. 
+The following paragraphs are about this code challenge.
 
 ### Track
 
@@ -94,15 +99,15 @@ My familiarity with the technical stack is:
 
 ### Technical choices, including architectural
 
-My goal for this code challenge is to try out and develop a serverless architecture.
+My goal for this code challenge is to develop a serverless architecture.
 
-To accomplish this I have chosen to use the following set of microservices:
-- **[Amazon DynamoDB](https://aws.amazon.com/dynamodb)**: Store locations based on their coordinates to perform quick queries
-- **[AWS Lambda](https://aws.amazon.com/lambda/)** & **[Amazon API Gateway](https://aws.amazon.com/api-gateway/)**: Provide API to retrieve data
-- **[Amazon S3](https://aws.amazon.com/s3/)**: Host static front-end (HTML/JavaScript)
+To accomplish this I've chosen to use the following set of microservices:
+- **[Amazon DynamoDB](https://aws.amazon.com/dynamodb)**: store locations based on their coordinates to perform quick queries
+- **[AWS Lambda](https://aws.amazon.com/lambda/)** & **[Amazon API Gateway](https://aws.amazon.com/api-gateway/)**: provide API to retrieve data
+- **[Amazon S3](https://aws.amazon.com/s3/)**: host static front-end (HTML/JavaScript)
 
-However in hindsight I am not sure whether DynamoDB was the right tool for the job.
-In future projects I will spend more time researching the possibilities and limitations of database engine to make a more informed decision.
+However in hindsight I'm not sure whether DynamoDB was the right tool for the job or not.
+In future projects I'll spend more time researching the possibilities and limitations of database engine to make a more informed decision.
 
 One of the difficulties I tried to solve was loading the markers within specific bounds.
 I wanted to avoid sending the whole data set when a user first loaded the map.
@@ -145,7 +150,7 @@ var dayRegexes = {
 - Custom builds of jQuery/Bootstrap
 - Make tests independent of data set
 - Remove focus styling on buttons
-- Add custom domain name for API Gateway. Disable CORS.
+- Add custom domain name for API Gateway and thereafter disable CORS.
 
 ### Resume/online profiles
 
@@ -155,8 +160,8 @@ var dayRegexes = {
 
 ### Other code
 
-- **My own website** ([code](https://github.com/MarkBiesheuvel/markbiesheuvel.nl)/[live](https://markbiesheuvel.nl/)): Automated builds with tons of web performance optimazations
-- **Six of spades** ([code](https://github.com/MarkBiesheuvel/six-of-spades)): A fully customizable poker library (work in progress)
+- **My own website** ([code](https://github.com/MarkBiesheuvel/markbiesheuvel.nl)/[live](https://markbiesheuvel.nl/)): automated builds with tons of web performance optimazations
+- **Six of spades** ([code](https://github.com/MarkBiesheuvel/six-of-spades)): a fully customizable poker library (in progress)
 
 ### Credits
 
