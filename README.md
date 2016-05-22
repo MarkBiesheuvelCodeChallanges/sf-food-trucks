@@ -36,9 +36,11 @@ The API endpoint accepts `POST` request with a raw json body.
 This json object is required to have a `bound` object with `north`, `east`, `south`, and `west` floats.
 The API will return all food trucks within an area equal to or larger than given by these bounds.
 
-It is possible to filter the food trucks based on name by setting a `name` string.
+With the `name` property you can filter on the name of the food truck
 
-It is possible to filter the food trucks based on which day they are open setting an `open_on` string.
+With the `open_on` property you can filter on which day the food truck is open. Valid options are `mo`, `tu`, `we`, `th`, `fr`, `sa`, or `su`
+
+With the `foodtype` property you can filter on the type of food the truck sells. Valid options are `snacks`, `mexican`, `sandwiches`, or `drinks`
 
 ### Example (jQuery)
 ```javascript
@@ -99,8 +101,8 @@ To accomplish this I have chosen to use the following set of microservices:
 - **[AWS Lambda](https://aws.amazon.com/lambda/)** & **[Amazon API Gateway](https://aws.amazon.com/api-gateway/)**: Provide API to retrieve data
 - **[Amazon S3](https://aws.amazon.com/s3/)**: Host static front-end (HTML/JavaScript)
 
-In hindsight however I am not sure using DynamoDB was the right choice.
-Looking back I should have spend more time researching what is possible with this NoSQL database compared to others.
+However in hindsight I am not sure whether DynamoDB was the right tool for the job.
+In future projects I will spend more time researching the possibilities and limitations of database engine to make a more informed decision.
 
 One of the difficulties I tried to solve was loading the markers within specific bounds.
 I wanted to avoid sending the whole data set when a user first loaded the map.
@@ -143,6 +145,7 @@ var dayRegexes = {
 - Custom builds of jQuery/Bootstrap
 - Make tests independent of data set
 - Remove focus styling on buttons
+- Add custom domain name for API Gateway. Disable CORS.
 
 ### Resume/online profiles
 
