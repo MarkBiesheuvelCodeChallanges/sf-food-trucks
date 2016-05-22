@@ -44,14 +44,14 @@ var getByLatLng = function (latlng, filters) {
             AttributeValueList: [filters.name]
         };
     }
-    
+
     if ('open_on' in filters) {
         params.QueryFilter.days = {
             ComparisonOperator: 'CONTAINS',
             AttributeValueList: [filters.open_on]
         };
     }
-    
+
     return new Promise(function (resolve, reject) {
 
         documentClient.query(params)
@@ -67,8 +67,18 @@ var getByLatLng = function (latlng, filters) {
 
 exports.handler = function (request, context) {
 
+    if (!('bounds' in request)) {
+        context.fail('Bounds are required');
+        return;
+    }
+
     var bounds = request.bounds;
     delete request.bounds;
+
+    if (!('north' in bounds) || !('east' in bounds) || !('south' in bounds) || !('west' in bounds)) {
+        context.fail('Bounds are required');
+        return;
+    }
 
     var north = Math.floor(bounds.north * 100);
     var east = Math.floor(bounds.east * 100);
