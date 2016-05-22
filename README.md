@@ -63,7 +63,7 @@ $.ajax({
         if ('errorMessage' in response) {
             console.error(response.errorMessage);
         } else {
-            items.forEach(function (item) {
+            response.forEach(function (item) {
                 /* Do something with item */
             });
         }
@@ -79,7 +79,7 @@ The following paragraphs are about the code challenge for which I created this p
 
 The focus during this code challenge was on the back-end.
 
-My famility with the technical stack is:
+My familiarity with the technical stack is:
 - **jQuery**: A lot of experience
 - **Google Maps JavaScript API**: A lot of experience
 - **Node.js** / **AWS Lambda**: A bit of experience
