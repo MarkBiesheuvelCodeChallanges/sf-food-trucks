@@ -6,12 +6,12 @@ AWS.config.update({
 
 var documentClient = new AWS.DynamoDB.DocumentClient();
 
-// var foodTypeRegexes = {
-//     'mexican': /(burritos?|quesadillas?|tacos?|nachos?|mexican|enchiladas?)/i,
-//     'sandwiches': /(sandwich(es)?|(ham)?burgers?)/i,
-//     'snacks': /(snacks?|pretzels?|candy|cookies?|donuts?|chips|nuts?)/i,
-//     'drinks': /(coffee|water|soda|juice|milk|beverages?|tea|hot chocolate|drinks?)/i
-// };
+var foodTypeRegexes = {
+    'mexican': /(burritos?|quesadillas?|tacos?|nachos?|mexican|enchiladas?)/i,
+    'sandwiches': /(sandwich(es)?|(ham)?burgers?)/i,
+    'snacks': /(snacks?|pretzels?|candy|cookies?|donuts?|chips|nuts?)/i,
+    'drinks': /(coffee|water|soda|juice|milk|beverages?|tea|hot chocolate|drinks?)/i
+};
 
 var dayRegexes = {
     'mo': /mo/i,
@@ -35,14 +35,14 @@ var insertItem = function (row) {
 
     row.latlng = Math.floor(row.latitude * 100) + ',' + Math.floor(row.longitude * 100);
 
-    // if ('fooditems' in row) {
-    //     row.foodtype = [];
-    //     for (var foodtype in foodTypeRegexes) {
-    //         if (row.fooditems.match(foodTypeRegexes[foodtype])) {
-    //             row.foodtype.push(foodtype);
-    //         }
-    //     }
-    // }
+    if ('fooditems' in row) {
+        row.foodtype = [];
+        for (var foodtype in foodTypeRegexes) {
+            if (row.fooditems.match(foodTypeRegexes[foodtype])) {
+                row.foodtype.push(foodtype);
+            }
+        }
+    }
 
     if('dayshours' in row){
         row.days = [];

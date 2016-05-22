@@ -30,12 +30,12 @@ var getByLatLng = function (latlng, filters) {
         }
     };
 
-    // if ('foodtype' in filters) {
-    //     params.QueryFilter.foodtype = {
-    //         ComparisonOperator: 'CONTAINS',
-    //         AttributeValueList: [filters.foodtype]
-    //     };
-    // }
+    if ('foodtype' in filters) {
+        params.QueryFilter.foodtype = {
+            ComparisonOperator: 'CONTAINS',
+            AttributeValueList: [filters.foodtype]
+        };
+    }
 
     if ('name' in filters) {
 
