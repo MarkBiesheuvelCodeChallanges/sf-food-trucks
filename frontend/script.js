@@ -128,22 +128,22 @@ $(function () {
 
             var $button = $(this);
             var value = $button.val();
-            var isActive = false;
 
             $button.on('click', function () {
 
-                // Flip active boolean
-                isActive = !isActive;
+                if ($button.hasClass('active')) {
+                    // Remove active class from all buttons
+                    $buttons.removeClass('active');
 
-                // Remove active class from all buttons
-                $buttons.removeClass('active');
-
-                if (isActive) {
-                    // Reapply active class
-                    $button.addClass('active');
-                    filters[name] = value;
-                } else {
+                    // Remove from filters
                     delete filters[name];
+                } else {
+                    // Apply active class to current button
+                    $buttons.removeClass('active');
+                    $button.addClass('active');
+
+                    // Add to filters
+                    filters[name] = value;
                 }
 
                 reload();

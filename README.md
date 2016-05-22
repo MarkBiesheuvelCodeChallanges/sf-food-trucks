@@ -142,6 +142,7 @@ var dayRegexes = {
 - Minimize assets (HTML/JavaScript/CSS)
 - Custom builds of jQuery/Bootstrap
 - Make tests independent of data set
+- Remove focus styling on buttons
 
 ### Resume/online profiles
 
